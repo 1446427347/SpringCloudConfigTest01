@@ -16,3 +16,15 @@ spring:
     port: 5672
     username: guest
     password: guest
+
+#关闭安全访问
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
