@@ -21,30 +21,7 @@ spring:
             - StripPrefix=1
       default-filters:
         - CircuitBreaker
-        
-  application:
-    name: cfc-mbfe
 
-  cloud:
-    config:
-      # 对应 {label} 部分，即 Git 的分支
-      label: main
-      # 对应 {application} 部分 配置⽂件名称
-      name: gateway
-      # 对应 {profile} 部分 后缀名称
-      profile: dev
-      fail-fast: true #连接不上config，尝试重连，最大6次
-      discovery:
-        # 开启 config 服务发现注册
-        enabled: true
-        # 指定 server
-        service-id: cfc-config-server
-    bus:
-      # 开启消息跟踪
-      enabled: true
-      trace:
-        enabled: true
-        
 # RabbitMQ相关配置
 rabbitmq:
   host: localhost
