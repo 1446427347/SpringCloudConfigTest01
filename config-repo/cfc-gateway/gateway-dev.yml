@@ -22,8 +22,6 @@ spring:
             - Path=/njcb/**
           filters:
             - StripPrefix=1
-      default-filters:
-        - CircuitBreaker
 
 # RabbitMQ相关配置
   rabbitmq:
