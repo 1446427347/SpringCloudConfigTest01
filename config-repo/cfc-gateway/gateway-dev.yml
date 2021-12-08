@@ -22,13 +22,6 @@ spring:
       default-filters:
         - CircuitBreaker
 
-# RabbitMQ相关配置
-rabbitmq:
-  host: localhost
-  port: 5672
-  username: guest
-  password: guest
-
 #关闭安全访问
 management:
 security:
