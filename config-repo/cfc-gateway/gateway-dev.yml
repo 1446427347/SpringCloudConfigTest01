@@ -34,6 +34,41 @@ spring:
 
 #关闭安全访问
 management:
+resilience4j:
+  retry:
+    retry-aspect-order: 399 #表示 retry 的优先级，默认高于限流、断路器，数值越小，优先级越高
+    backends:
+      retryA:
+        maxRetryAttempts: 5 #重试次数
+        waitDuration: 500 #重试等待时间
+        exponentialBackoffMultiplier: 1.1 #间隔乘数，第一次 1.1秒，第二次 1.21 秒
+        retryExceptions: # 触发重试的异常
+          - java.lang.RuntimeException
+  ratelimiter:
+    limiters:
+      rlA:
+        limit-for-period: 1
+        limit-refresh-period: 1s
+        timeout-duration: 1s
+
+#配置断路器
+  circuitbreaker:
+    instances:
+      cbA: #实例自定义名字
+        ringBufferSizeInClosedState: 5
+        ringBufferSizeInHalfOpenState: 3
+        waitInterval: 5000
+        recordExceptions:
+          - org.springframework.web.client.HttpServerErrorException
+#    limiters:
+#      backendA:
+#        limitForPeriod: 1
+#        limitRefreshPeriodInMillis: 5000
+#        timeoutInMillis: 5000
+#        subscribeForEvents: true
+#        registerHealthIndicator: true
+#        eventConsumerBufferSize: 1
+
   security:
     enabled: false
   endpoints:
