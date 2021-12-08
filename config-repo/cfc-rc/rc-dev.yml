@@ -1,0 +1,21 @@
+server:
+  port: 9100
+  tomcat:
+    uri-encoding: UTF-8
+    max-thread: 1000
+spring:
+boot:
+  admin:
+    client:
+      url: http://localhost:1000
+ #关闭安全访问
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
