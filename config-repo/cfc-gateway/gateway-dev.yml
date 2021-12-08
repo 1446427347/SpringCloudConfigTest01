@@ -1,0 +1,65 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        # 认证中心
+        - id: cfc-rc
+          uri: lb:/cfc-rc
+          predicates:
+            - Path=/cfc-rc/services/**
+          filters:
+            - StripPrefix=2
+        - id: cfc-mbfe
+          uri: lb://cfc-mbfe
+          predicates:
+            - Path=/njcb/**
+          filters:
+            - StripPrefix=1
+      default-filters:
+        - CircuitBreaker
+        
+  application:
+    name: cfc-mbfe
+
+  cloud:
+    config:
+      # 对应 {label} 部分，即 Git 的分支
+      label: main
+      # 对应 {application} 部分 配置⽂件名称
+      name: mbfe
+      # 对应 {profile} 部分 后缀名称
+      profile: dev
+      fail-fast: true #连接不上config，尝试重连，最大6次
+      discovery:
+        # 开启 config 服务发现注册
+        enabled: true
+        # 指定 server
+        service-id: cfc-config-server
+    bus:
+      # 开启消息跟踪
+      enabled: true
+      trace:
+        enabled: true
+        
+# RabbitMQ相关配置
+rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+
+#关闭安全访问
+management:
+security:
+  enabled: false
+endpoints:
+  web:
+    exposure:
+      include: '*'
+endpoint:
+  health:
+    show-details: always
