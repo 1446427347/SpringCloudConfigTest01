@@ -43,6 +43,13 @@ spring:
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
       useGlobalDataSourceStat: false # 合并多个DruidDataSource的监控数据
       
+# mybatis配置
+mybatis:
+    # 搜索指定包别名
+    typeAliasesPackage: cn.com.njcb
+    # 配置mapper的扫描，找到所有的mapper.xml映射文件
+    mapperLocations: classpath:mapper/**/*.xml
+    
  #关闭安全访问
 management:
   security:
