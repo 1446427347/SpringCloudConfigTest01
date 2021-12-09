@@ -26,7 +26,6 @@ management:
     health:
       show-details: always
       
-spring:
   datasource:
     druid:
       stat-view-servlet:
