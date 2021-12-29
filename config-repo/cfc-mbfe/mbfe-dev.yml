@@ -8,7 +8,7 @@ spring:
   sleuth:
     sampler:
       probability: 1  # 设置抽样采集率为100%，默认为0.1，即10%
-	  
+  
   datasource:
     name: dataSource #如果存在多个数据源，监控的时候可以通过名字来区分开来。如果没有配置，将会生成一个名字，格式是："DataSource-" + System.identityHashCode(this)
     type: com.alibaba.druid.pool.DruidDataSource
